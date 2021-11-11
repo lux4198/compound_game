@@ -1,10 +1,20 @@
 import React from 'react'
 import Typography from '@material-ui/core/Typography'
-import { Button } from '@material-ui/core'
+import { Button, makeStyles } from '@material-ui/core';
+
+
+const styles = makeStyles({
+    button:{
+        '&:hover': {
+          backgroundColor : '#341363', 
+        }, 
+      }
+    });
 
 function CustomBtn(props) {
+    const classes = styles()
     return (
-        <Button className = {props.className}
+        <Button className = {classes.button}
                 variant = 'contained'
                 onClick = {props.Click} 
                 color = {props.color}
