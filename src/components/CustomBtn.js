@@ -20,6 +20,8 @@ function CustomBtn(props) {
                 color = {props.color}
                 disabled = {props.disabled}
                 startIcon = {props.icon}
+                style = {props.style} 
+                type = {props.type}
                 >
           <Typography variant = 'h5'>{props.text}</Typography>
         </Button>
