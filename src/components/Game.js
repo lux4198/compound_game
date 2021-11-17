@@ -47,13 +47,20 @@ class Game extends React.Component{
         super(props)
 
         this.state = {
-            current_round : 0,
+            round : {
+                current : 1, 
+                capital : Math.round((Math.random() * 100))*10000, 
+                time : Math.round(Math.random() * 30), 
+                interest : Math.round(Math.random() * 12), 
+            },
             userInput : '', 
             submissionInput : '',  
         }
-
-        this.Card = this.Card.bind(this)
+        
+        this.GameText = this.GameText.bind(this)
+        this.GameCard = this.GameCard.bind(this)
         this.HandleSubmit = this.HandleSubmit.bind(this)
+
     };
 
     GameText() {
@@ -61,11 +68,11 @@ class Game extends React.Component{
         return(
     
         <div className = {classes.text}>
-            <Typography variant = 'h4' style = {{paddingBottom: '2rem',}}> Example No. n </Typography>
+            <Typography variant = 'h4' style = {{paddingBottom: '2rem',}}> Example No. {this.state.round.current} </Typography>
             <Typography variant = 'h6' style = {{}}> 
-            You have 1000 $ in the bank today. <br></br> 
-            On a good contract you will get 10 % interest per Year. <br></br>
-            How much Money will you have in 10, 20, 30, 40 Years? 
+            You have {this.state.round.capital} $ in the bank today. <br></br> 
+            Your bank will provide you with {this.state.round.interest} % interest per Year. <br></br>
+            How much Money will you have after {this.state.round.time} Years? 
             <br></br>
             Good Luck! 
             </Typography>
@@ -85,13 +92,22 @@ class Game extends React.Component{
 
     HandleSubmit(e){
         e.preventDefault()
-        const re = /^[0-9\b]+$/ 
+        const re = /^[0-9]+$/ 
         if (re.test(this.state.submissionInput)) {
-            this.setState({userInput : this.state.submissionInput})
+            this.setState({userInput : this.state.submissionInput, 
+                            round : {
+                                current : this.state.round.current += 1, 
+                                capital : Math.round(((Math.random() + 0.3) * 10))*10000, 
+                                time : Math.round(Math.random() * 25) + 1, 
+                                interest : Math.round(Math.random() * 15) + 1, 
+                            }})
             }
-    }
+        else {
+            alert('Please type in a whole number')
+        }
+        }
 
-    Card(props){
+    GameCard(props){
         const classes = styles();
 
         return(
@@ -111,7 +127,7 @@ class Game extends React.Component{
 
     render(){
         return(
-            <this.Card HandleGameStart = {() => {this.props.HandleGameStart()}}/>
+            <this.GameCard HandleGameStart = {() => {this.props.HandleGameStart()}}/>
         )
     }
 }
