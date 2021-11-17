@@ -85,7 +85,10 @@ class Game extends React.Component{
 
     HandleSubmit(e){
         e.preventDefault()
-        console.log(typeof(this.state.submissionInput))
+        const re = /^[0-9\b]+$/ 
+        if (re.test(this.state.submissionInput)) {
+            this.setState({userInput : this.state.submissionInput})
+            }
     }
 
     Card(props){
