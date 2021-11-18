@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Grid, Card, makeStyles} from '@material-ui/core'
+import { Typography, Card, makeStyles} from '@material-ui/core'
 import CustomBtn from './CustomBtn'
 import start_card_expo from '../images/start_card_expo.png';
 
@@ -36,8 +36,8 @@ function StartText() {
         <Typography variant = 'h4' style = {{paddingBottom: '2rem',}}> Play The Game </Typography>
         <Typography variant = 'h6' style = {{}}> 
         This game is designed to test Your inutition on compounding effects. <br></br> 
-        You will be given different examples that represent a compounding problem. You will have 5 seconds to
-        submit Your best guess. Your Result will be calculated depending on the accuracy of Your submission.
+        You will be given different examples that represent a compounding problem. <br></br>
+        You have 5 seconds to submit Your best guess. Your Score will be calculated depending on the accuracy of Your submissions.
         <br></br>
         Good Luck! 
         </Typography>
@@ -45,11 +45,12 @@ function StartText() {
     )
 };
 
-function StartButton() {
+function StartButton(props) {
     return(
         <div style = {{display : 'flex', flexDirection : 'column'}}>
             <div style = {{paddingRight : '2rem', paddingTop : '1rem'}}>
-                <CustomBtn text = 'Start' color = 'secondary' style = {{width : '35%', float : 'right'}}>
+                <CustomBtn text = 'Start' color = 'secondary' style = {{width : '35%', float : 'right'}}
+                            Click = {props.Click}>
                 </CustomBtn>
             </div>
             <img src = {start_card_expo}></img>
@@ -58,13 +59,13 @@ function StartButton() {
 };  
 
 
-function StartCard() {
+function StartCard(props) {
     const classes = styles()
     return (
         <Card  className = {classes.card}>
             <div className = {classes.grid}>
                 <StartText/>
-                <StartButton/>
+                <StartButton Click = {props.Click}/>
             </div>
         </Card>
     )
