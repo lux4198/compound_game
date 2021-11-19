@@ -5,7 +5,7 @@ import { ThreeSixtySharp } from "@material-ui/icons";
 import CustomBtn from "./CustomBtn";
 
 import SendIcon from '@material-ui/icons/Send';
-import ResultCard from "./ResultCard";
+import Results from "./Results";
 
 
 const styles = makeStyles({
@@ -76,7 +76,7 @@ class Game extends React.Component{
         this.state = {
             round : {
                 current : 1, 
-                capital : Math.round((Math.random() * 100))*10000, 
+                capital : Math.round(Math.random()*10)*1000, 
                 years : Math.round(Math.random() * 30), 
                 interest : Math.round(Math.random() * 12),
             },
@@ -155,7 +155,7 @@ class Game extends React.Component{
             return(
                 {round : {
                 current : this.state.round.current += 1, 
-                capital : Math.round((Math.random() * 100))*10000, 
+                capital : Math.round((Math.random() * 100))*1000, 
                 years : Math.round(Math.random() * 25) + 1, 
                 interest : Math.round(Math.random() * 15) + 1,
                 },
@@ -204,7 +204,7 @@ class Game extends React.Component{
                 <div className = {classes.grid}>
                     <this.GameText/>
                     <div className = {classes.interface}>
-                        <EndGameButton Click = {() => {props.RenderResult()}}/>
+                        <EndGameButton Click = {(this.state.round.current === 1) ? props.HandleGameStart : props.RenderResult}/>
                         <form /* noValidate */ autoComplete = 'off' onSubmit = {this.HandleSubmit} style = {{display : 'flex', flexDirection: 'column', }}>
                             <Input style = {{paddingBottom : '2rem'}}  value = {this.state.submissionInput} 
                                     onChange = {(e) => {this.setState({submissionInput : e.target.value})}}
@@ -222,16 +222,46 @@ class Game extends React.Component{
         this.componentWillUnmount()
         this.saveToHistory()
         this.setState({
-            displayResult : true, 
+            displayResult : !this.state.displayResult, 
         })
     }
 
-    RenderInterface(){
+    RenderInterface(props){
         if (this.state.displayResult){
-            return(<ResultCard Results = {this.state.GameHistory}/>)
+            return(<Results Results = {this.state.GameHistory} HandleGameStart = {() => {
+                this.props.HandleGameStart()}} StartNewGame = {() => {this.StartNewGame()}} 
+                />
+                )
         } else {
-           return(<this.GameCard RenderResult = {() => {this.RenderResult()}}/>)
+           return(<this.GameCard RenderResult = {() => {this.RenderResult()}} HandleGameStart = {() => {
+               this.props.HandleGameStart()}}
+               />
+           )
         }}
+
+    StartNewGame(){
+        this.componentDidMount()
+        this.setState((state) => {
+            return(
+                {
+            round : {
+                current : 1, 
+                capital : Math.round(Math.random()*10)*1000, 
+                years : Math.round(Math.random() * 30), 
+                interest : Math.round(Math.random() * 12),
+            },
+
+            seconds : 30,
+            intervalID : '',  
+
+            userInput : '', 
+            submissionInput : '', 
+            
+            GameHistory : [],
+            displayResult : false, 
+        })
+    })
+    }
 
     render(){
         return(

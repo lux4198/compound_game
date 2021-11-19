@@ -70,6 +70,7 @@ class App extends React.Component{
   }
 
   HandleGameStart(){
+
     this.setState(
       {gameStartButton : !this.state.gameStartButton}
     )
@@ -103,7 +104,7 @@ class App extends React.Component{
   render(){
       return (
         <this.RenderGame gameStartButton = {this.state.gameStartButton}/>
-        // <Game/>
+        // <Game HandleGameStart = {this.HandleGameStart()}/>
       );
   }
 }
