@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Input from "./Input";
 import { Card, Typography, makeStyles } from "@material-ui/core";
-import { ThreeSixtySharp } from "@material-ui/icons";
 import CustomBtn from "./CustomBtn";
 
 import SendIcon from '@material-ui/icons/Send';
@@ -76,9 +75,9 @@ class Game extends React.Component{
         this.state = {
             round : {
                 current : 1, 
-                capital : Math.round(Math.random()*10)*1000, 
-                years : Math.round(Math.random() * 30), 
-                interest : Math.round(Math.random() * 12),
+                capital : Math.ceil(Math.random()*10)*1000, 
+                years : Math.ceil(Math.random() * 30), 
+                interest : Math.ceil(Math.random() * 12),
             },
 
             seconds : 30,
@@ -155,9 +154,9 @@ class Game extends React.Component{
             return(
                 {round : {
                 current : this.state.round.current += 1, 
-                capital : Math.round((Math.random() * 100))*1000, 
-                years : Math.round(Math.random() * 25) + 1, 
-                interest : Math.round(Math.random() * 15) + 1,
+                capital : Math.ceil(Math.random()*10)*1000, 
+                years : Math.ceil(Math.random() * 30), 
+                interest : Math.ceil(Math.random() * 12),
                 },
                 seconds : 30,
                 submissionInput : ''})
@@ -246,9 +245,9 @@ class Game extends React.Component{
                 {
             round : {
                 current : 1, 
-                capital : Math.round(Math.random()*10)*1000, 
-                years : Math.round(Math.random() * 30), 
-                interest : Math.round(Math.random() * 12),
+                capital : Math.ceil(Math.random()*10)*1000, 
+                years : Math.ceil(Math.random() * 30), 
+                interest : Math.ceil(Math.random() * 12),
             },
 
             seconds : 30,
