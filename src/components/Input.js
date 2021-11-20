@@ -5,11 +5,9 @@ import { PinDropSharp } from '@material-ui/icons'
 function Input(props) {
     
     return (
-        <div style = {{padding : '1rem', width : '100%'}}>
-            <TextField variant = 'outlined' color = 'secondary' label = 'Estimate' placeholder = 'Enter Number'
-                        onChange = {props.onChange} autoFocus = {true} 
-                        type = 'number' />
-        </div> 
+        <TextField variant = 'outlined' color = 'secondary' label = 'Estimate' placeholder = 'Enter Number' 
+                    fullWidth onChange = {props.onChange} autoFocus = {true} 
+                    type = 'number' value = {props.value} style = {props.style} size = 'medium'/> 
         
         
         )

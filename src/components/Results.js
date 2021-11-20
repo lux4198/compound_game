@@ -48,7 +48,6 @@ class Results extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            hello : 'there',
         }
         
         this.CalculateResult = this.CalculateResult.bind(this)

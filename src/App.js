@@ -11,9 +11,10 @@ import CustomBtn from './components/CustomBtn'
 import Input from './components/Input'
 import StartCard from './components/StartCard'
 import Game from './components/Game';
+import NavBar from './components/NavBar';
 
 
-// Icons
+// Icons / images
 
 import SettingsBackupRestoreIcon from '@material-ui/icons/SettingsBackupRestore';
 import { ThreeSixtySharp } from '@material-ui/icons';
@@ -47,7 +48,7 @@ const styles = makeStyles({
     display: 'flex',   
   }, 
   header: {
-    padding : '6rem'
+    paddingBottom : '6rem'
   },
   footer: {
     padding : '16rem'
@@ -94,7 +95,9 @@ class App extends React.Component{
     const classes = styles()
       return (
         <div>
-          <div className = {classes.header}></div>
+          <div className = {classes.header}>
+            <NavBar/>
+          </div>
           <this.GameInterface gameStartButton = {props.gameStartButton}/> 
           <div className = {classes.footer}> </div>
         </div>
