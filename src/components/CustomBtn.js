@@ -4,9 +4,14 @@ import { Button, makeStyles } from '@material-ui/core';
 
 
 const styles = makeStyles({
-    button:{
+    primarybutton:{
         '&:hover': {
-          backgroundColor : '#341363', 
+          backgroundColor : '#9B3344', 
+        }, 
+      },
+      secondarybutton:{
+        '&:hover': {
+          backgroundColor : '#2E5D68', 
         }, 
       }
     });
