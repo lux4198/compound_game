@@ -7,7 +7,7 @@ import CustomBtn from './CustomBtn';
 
 const styles = makeStyles({
     bar : {
-        backgroundColor : '#c2d9d7', 
+        backgroundColor : '#526268', 
         ['@media (max-width: 780px)'] : {
             flexdirection : 'column'
         }
@@ -19,12 +19,17 @@ const styles = makeStyles({
            },
     },
     menuItem: {
-        cursor: "pointer", 
-        flexGrow: 1,
-        '&:hover': {
-            color: '#581894'
-        },
+        flexGrow : 1, 
+        display : 'flex',
+        justifyContent : 'center', 
     }, 
+    menuText: {
+        cursor: "pointer", 
+        '&:hover': {
+            color: '#98aeb7'
+        },
+        color : 'white', 
+    }
 })
 
 function NavBar() {
@@ -34,21 +39,28 @@ function NavBar() {
             <img src = {start_card_expo} className = {classes.logo} style = {{padding : '1rem'}}></img>
 
             <Typography variant = 'h5' className = {classes.menuItem} style = {{paddingLeft : '4rem'}}>
-                About
+                <div className = {classes.menuText}>
+                    About
+                </div>
             </Typography>
 
             <Typography variant = 'h5' className = {classes.menuItem}>
-                Career
+                <div className = {classes.menuText}>
+                    Career 
+                </div>
             </Typography>
 
             <Typography variant = 'h5' className = {classes.menuItem}>
-                Demos
+                <div className = {classes.menuText}>
+                    Locations
+                </div>
             </Typography>
-            
+
             <Typography variant = 'h5' className = {classes.menuItem}>
-                Locations
+                <div className = {classes.menuText}>
+                    Feedback
+                </div>
             </Typography>
-            <CustomBtn text = 'Log In' color = 'primary'/>
         </Toolbar>
     )
 }
