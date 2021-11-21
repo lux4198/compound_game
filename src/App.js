@@ -17,36 +17,18 @@ import NavBar from './components/NavBar';
 // Icons / images
 
 import SettingsBackupRestoreIcon from '@material-ui/icons/SettingsBackupRestore';
-import { ThreeSixtySharp } from '@material-ui/icons';
+
 
 
 const styles = makeStyles({
-  wrapper: {
-    margin: '1rem',
+  gameInterface : { 
+    marginRight:'3rem', 
+    paddingLeft:'4rem',
+    paddingRight:'4rem',  
+    display : 'flex',
+    float : 'right', 
+    width : '80%', 
   },
-  card:{
-    width:'65%', 
-    float:'right',
-    marginRight:'6rem', 
-    padding:'2rem', 
-    paddingBottom : { xs: 3, sm: 3, md: 3, lg : 3 }, 
-  },
-  grid:{
-    display: 'flex', 
-    justifyContent: 'center', 
-    paddingTop : '2rem',
-    paddingBottom : '2rem', 
-  },
-  gridcontainer:{
-    width : '45%', 
-    alignItems : 'center', 
-    float: 'right', 
-    padding : '2rem', 
-  },
-  griditem: {
-    justifyContent: 'center', 
-    display: 'flex',   
-  }, 
   header: {
     paddingBottom : '6rem'
   },
@@ -81,12 +63,12 @@ class App extends React.Component{
 
     if (props.gameStartButton){
       return(
-        <Game HandleGameStart = {() => {this.HandleGameStart()}}/>
+        <Game HandleGameStart = {() => {this.HandleGameStart()}} className = {props.className}/>
       )
     }
     else{
       return(
-      <StartCard Click = {() => {this.HandleGameStart()}}/>
+      <StartCard Click = {() => {this.HandleGameStart()}} className = {props.className}/>
       );
     }
     }
@@ -98,7 +80,7 @@ class App extends React.Component{
           <div className = {classes.header}>
             <NavBar/>
           </div>
-          <this.GameInterface gameStartButton = {props.gameStartButton}/> 
+          <this.GameInterface gameStartButton = {props.gameStartButton} className = {classes.gameInterface}/> 
           <div className = {classes.footer}> </div>
         </div>
       );

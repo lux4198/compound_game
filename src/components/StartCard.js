@@ -4,27 +4,24 @@ import CustomBtn from './CustomBtn'
 import start_card_expo from '../images/start_card_expo.png';
 
 const styles = makeStyles({
-    card:{
-        width:'70%', 
-        marginRight:'3rem', 
-        paddingLeft:'4rem',
-        paddingRight:'4rem',  
-        display : 'flex',
-        float : 'right', 
-    }, 
     grid:{
         display : 'flex',  
         },
     text: {
         display : 'flex', 
         flexDirection: 'column', 
-        width : '60%',
+        width : '80%',
         paddingRight : '4rem',
         paddingTop : '3rem',
         paddingBottom : '4rem', 
         borderRight : 'black', 
         borderRightStyle : 'solid', 
     },
+    button : {
+        display : 'flex', 
+        flexDirection : 'column', 
+        justifyContent : 'center',
+    }
 }); 
 
 function StartText() {
@@ -46,14 +43,17 @@ function StartText() {
 };
 
 function StartButton(props) {
+    const classes = styles()
     return(
-        <div style = {{display : 'flex', flexDirection : 'column'}}>
-            <div style = {{paddingRight : '2rem', paddingTop : '1rem'}}>
-                <CustomBtn text = 'Start' color = 'secondary' style = {{width : '35%', float : 'right'}}
+        <div className = {classes.button}>
+            <div style = {{display : 'flex', justifyContent : 'flex-end', }}>
+                <CustomBtn text = 'Play' color = 'secondary'
                             Click = {props.Click}>
                 </CustomBtn>
             </div>
-            <img src = {start_card_expo}></img>
+            <div style = {{width : '110%' }}>
+                <img src = {start_card_expo} style = {{width : '100%', heigth : 'auto',}}></img>
+            </div>
         </div>
     )
 };  
@@ -62,7 +62,7 @@ function StartButton(props) {
 function StartCard(props) {
     const classes = styles()
     return (
-        <Card  className = {classes.card}>
+        <Card  className = {props.className}>
             <div className = {classes.grid}>
                 <StartText/>
                 <StartButton Click = {props.Click}/>

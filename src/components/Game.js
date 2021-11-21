@@ -2,18 +2,15 @@ import React, { useState } from "react";
 import Input from "./Input";
 import { Card, Typography, makeStyles } from "@material-ui/core";
 import CustomBtn from "./CustomBtn";
+import Results from "./Results";
 
 import SendIcon from '@material-ui/icons/Send';
-import Results from "./Results";
+import TimerIcon from '@material-ui/icons/Timer';
+
+
 
 
 const styles = makeStyles({
-    card:{
-        width:'70%', 
-        marginRight:'3rem',  
-        display : 'flex',
-        float : 'right', 
-    }, 
     grid:{
         display : 'flex',  
         width : '100%', 
@@ -21,19 +18,16 @@ const styles = makeStyles({
     text: {
         display : 'flex', 
         flexDirection: 'column', 
-        width : '60%',
-        paddingRight : '4rem',
-        paddingLeft:'5rem',
-        paddingTop : '4rem',
+        width : '80%',
+        paddingRight : '4rem', 
+        paddingTop : '2.5rem',
         paddingBottom : '5rem', 
         borderRight : 'black', 
         borderRightStyle : 'solid', 
     },
     interface : {
-        paddingRight : '3rem',
-        paddingLeft:'4rem',
-        paddingTop : '2rem',
-        paddingBottom : '4rem',
+        scale : 0.85, 
+        paddingLeft:'3rem',
         display : 'flex', 
         flexDirection : 'column', 
         float : 'right', 
@@ -131,12 +125,18 @@ class Game extends React.Component{
 
     GameText() {
         const classes = styles()
-        const result = Math.round((this.state.round.capital * ((1 + (this.state.round.interest/100))**this.state.round.years)))
+        // const result = Math.round((this.state.round.capital * ((1 + (this.state.round.interest/100))**this.state.round.years)))
 
         return(
     
         <div className = {classes.text}>
-            <Typography variant = 'h4' style = {{paddingBottom: '2rem',}}> Example No. {this.state.round.current} - {this.state.seconds} - {result}</Typography>
+            <div style = {{display : 'flex', justifyContent : 'space-between'}}>
+                <Typography variant = 'h4' style = {{paddingBottom: '2rem',}}> Example No. {this.state.round.current}</Typography>
+                <div style = {{display : 'flex', flexDirection: 'row'}}>
+                    <Typography variant = 'h3'>{this.state.seconds}</Typography>
+                    <TimerIcon fontSize = 'large'/>
+                </div>
+            </div>
             <Typography variant = 'h5' style = {{}}> 
             You have {this.state.round.capital} $ in the bank today. <br></br> 
             Your bank will provide you with {this.state.round.interest} % interest per Year. <br></br>
@@ -199,15 +199,17 @@ class Game extends React.Component{
     GameCard(props){
         const classes = styles();
         return(
-            <Card  className = {classes.card}>
+            <Card  className = {props.className}>
                 <div className = {classes.grid}>
                     <this.GameText/>
                     <div className = {classes.interface}>
                         <EndGameButton Click = {(this.state.round.current === 1) ? props.HandleGameStart : props.RenderResult}/>
                         <form /* noValidate */ autoComplete = 'off' onSubmit = {this.HandleSubmit} style = {{display : 'flex', flexDirection: 'column', }}>
-                            <Input style = {{paddingBottom : '2rem'}}  value = {this.state.submissionInput} 
-                                    onChange = {(e) => {this.setState({submissionInput : e.target.value})}}
-                                    />
+                            <div>
+                                <Input style = {{paddingBottom : '2rem',}}  value = {this.state.submissionInput} 
+                                        onChange = {(e) => {this.setState({submissionInput : e.target.value})}}
+                                        />
+                            </div>
                             <Submitbutton/>
                         </form>
                     </div>
@@ -228,12 +230,12 @@ class Game extends React.Component{
     RenderInterface(props){
         if (this.state.displayResult){
             return(<Results Results = {this.state.GameHistory} HandleGameStart = {() => {
-                this.props.HandleGameStart()}} StartNewGame = {() => {this.StartNewGame()}} 
+                this.props.HandleGameStart()}} StartNewGame = {() => {this.StartNewGame()}} className = {props.className}
                 />
                 )
         } else {
            return(<this.GameCard RenderResult = {() => {this.RenderResult()}} HandleGameStart = {() => {
-               this.props.HandleGameStart()}}
+               this.props.HandleGameStart()}} className = {props.className}
                />
            )
         }}
@@ -264,7 +266,7 @@ class Game extends React.Component{
 
     render(){
         return(
-            <this.RenderInterface/>
+            <this.RenderInterface className = {this.props.className}/>
         )
     }
 }

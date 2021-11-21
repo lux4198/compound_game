@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { createTheme , ThemeProvider} from '@material-ui/core/styles'
+import { createTheme , ThemeProvider, makeStyles} from '@material-ui/core/styles'
 
 
 const theme = createTheme({
@@ -23,10 +23,12 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: [
-      'Roboto'
+      'Roboto', 'sans-serif'
     ],
+    fontSize: 'inherit',  
   },
 });
+
 
 ReactDOM.render(
   <React.StrictMode>

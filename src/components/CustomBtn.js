@@ -28,7 +28,7 @@ function CustomBtn(props) {
                 style = {props.style} 
                 type = {props.type}
                 >
-          <Typography variant = 'h5'>{props.text}</Typography>
+          <Typography variant = 'h2'>{props.text}</Typography>
         </Button>
     )
 }
