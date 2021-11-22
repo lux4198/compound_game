@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import Input from "./Input";
 import { Card, Typography, makeStyles } from "@material-ui/core";
 import CustomBtn from "./CustomBtn";
-import Results from "./Results";
+import ResultInterface from "./Results";
 
 import SendIcon from '@material-ui/icons/Send';
 import TimerIcon from '@material-ui/icons/Timer';
+import { HighlightSharp } from "@material-ui/icons";
 
 
 
@@ -55,7 +56,8 @@ function Submitbutton(){
     <div style = {{display : 'flex', flexDirection : 'column'}}>
         <div style = {{paddingRight : '2rem', paddingTop : '1rem'}}>
             <CustomBtn text = 'Submit' color = 'secondary' type = 'submit' icon = {<SendIcon />}
-                        style = {{paddingLeft : '3rem', paddingRight : '3rem', paddingTop : '0.5rem', paddingBottom : '0.5rem',}}/>
+                        style = {{paddingLeft : '3rem', paddingRight : '3rem', paddingTop : '0.5rem', paddingBottom : '0.5rem',
+                                    width : '50%', }}/>
         </div>
     </div>
     )
@@ -66,6 +68,7 @@ class Game extends React.Component{
     constructor(props){
         super(props)
 
+        // calculate random numbers for different variables in example
         this.state = {
             round : {
                 current : 1, 
@@ -87,13 +90,15 @@ class Game extends React.Component{
         // const result = Math.round((this.state.round.capital * ((1 + (this.state.round.interest/100))**this.state.round.years)))
         
         this.timer = this.timer.bind(this)
-        this.GameText = this.GameText.bind(this)
-        this.GameCard = this.GameCard.bind(this)
         this.HandleSubmit = this.HandleSubmit.bind(this)
         this.ResetGame = this.ResetGame.bind(this)
         this.RenderResult = this.RenderResult.bind(this)
-        this.RenderInterface = this.RenderInterface.bind(this)
         this.saveToHistory = this.saveToHistory.bind(this)
+
+        this.GameText = this.GameText.bind(this)
+        this.GameInterface = this.GameInterface.bind(this)
+        this.RenderInterface = this.RenderInterface.bind(this)
+        
 
     };
 
@@ -123,6 +128,7 @@ class Game extends React.Component{
         }
     }
 
+    // displays example by using .state variables
     GameText() {
         const classes = styles()
         // const result = Math.round((this.state.round.capital * ((1 + (this.state.round.interest/100))**this.state.round.years)))
@@ -196,7 +202,7 @@ class Game extends React.Component{
     }
     
     // displays the Game Interface 
-    GameCard(props){
+    GameInterface(props){
         const classes = styles();
         return(
             <Card  className = {props.className}>
@@ -227,19 +233,21 @@ class Game extends React.Component{
         })
     }
 
+    // Render GameInterface or ResultInterface depending on state.displayResult
     RenderInterface(props){
-        if (this.state.displayResult){
-            return(<Results Results = {this.state.GameHistory} HandleGameStart = {() => {
+        if (this.state.displayResult | this.state.round.current === 7){
+            return(<ResultInterface Results = {this.state.GameHistory} HandleGameStart = {() => {
                 this.props.HandleGameStart()}} StartNewGame = {() => {this.StartNewGame()}} className = {props.className}
                 />
                 )
         } else {
-           return(<this.GameCard RenderResult = {() => {this.RenderResult()}} HandleGameStart = {() => {
+           return(<this.GameInterface RenderResult = {() => {this.RenderResult()}} HandleGameStart = {() => {
                this.props.HandleGameStart()}} className = {props.className}
                />
            )
         }}
 
+    // reset values and start new timer for new game coming from Results
     StartNewGame(){
         this.componentDidMount()
         this.setState((state) => {

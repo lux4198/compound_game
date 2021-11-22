@@ -1,39 +1,32 @@
 import { makeStyles, Card, Typography } from '@material-ui/core'
-import { ThreeSixtySharp } from '@material-ui/icons';
 import React from 'react'
 
 
 // components
 import CustomBtn from './CustomBtn';
-import Input from './Input';
+
+// icons 
+import { ThreeSixtySharp } from '@material-ui/icons';
 
 const styles = makeStyles({
-    card:{
-        width:'70%', 
-        marginRight:'3rem',  
-        display : 'flex',
-        float : 'right',
-    },
     grid : {
         display : 'flex', 
         width : '100%'
     },
     interface : {
-        paddingRight : '3rem',
-        paddingLeft:'4rem',
-        paddingTop : '2rem',
-        paddingBottom : '4rem',
+        scale : 0.9, 
         display : 'flex', 
         flexDirection : 'column', 
-        float : 'right', 
-        width : '40%',
+        justifyContent: 'space-around', 
+        alignItems : 'center', 
+        width : '30%',
+        paddingLeft : '2rem', 
     },  
     text: {
         display : 'flex', 
         flexDirection: 'column', 
-        width : '60%',
-        paddingRight : '4rem',
-        paddingLeft:'5rem',
+        width : '70%',
+        paddingRight : '2rem',
         paddingTop : '4rem',
         paddingBottom : '5rem', 
         borderRight : 'black', 
@@ -44,7 +37,7 @@ const styles = makeStyles({
 
 }); 
 
-class Results extends React.Component{
+class ResultInterface extends React.Component{
     constructor(props){
         super(props)
         this.state = {
@@ -91,14 +84,12 @@ class Results extends React.Component{
     ResultCard(props) {
         const classes = styles();
             return(
-                <Card  className = {classes.card}>
+                <Card  className = {props.className} style = {{width : '60%'}}>
                     <div className = {classes.grid}>
                         <this.GameText Results = {props.Results}/>
                         <div className = {classes.interface}>
-                            <CustomBtn Click = {props.HandleGameStart} text = 'Go To Start' color = 'primary'/>
-                            <form /* noValidate */ autoComplete = 'off' /* onSubmit = {this.HandleSubmit} */ style = {{display : 'flex', flexDirection: 'column', paddingTop : '4rem', }}>
-                                <CustomBtn text = 'Play Again' color = 'secondary' Click = {props.StartNewGame}/>
-                            </form>
+                            <CustomBtn Click = {props.HandleGameStart} text = 'Back To Start' color = 'primary'/>
+                            <CustomBtn text = 'Play Again' color = 'secondary' Click = {props.StartNewGame} icon = {<ThreeSixtySharp/>}/>
                         </div>
                     </div>
                 </Card>
@@ -108,10 +99,10 @@ class Results extends React.Component{
     render(){
         return(
             <this.ResultCard Results = {this.props.Results} HandleGameStart = {() => {this.props.HandleGameStart()}}
-            StartNewGame = {() => {this.props.StartNewGame()}} 
+            StartNewGame = {() => {this.props.StartNewGame()}} className = {this.props.className}
             />
         )
     }
 }
 
-export default Results
+export default ResultInterface
