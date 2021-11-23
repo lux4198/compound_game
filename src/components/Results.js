@@ -7,6 +7,7 @@ import CustomBtn from './CustomBtn';
 
 // icons 
 import { ThreeSixtySharp } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
 
 const styles = makeStyles({
     grid : {
@@ -88,7 +89,9 @@ class ResultInterface extends React.Component{
                     <div className = {classes.grid}>
                         <this.GameText Results = {props.Results}/>
                         <div className = {classes.interface}>
-                            <CustomBtn Click = {props.HandleGameStart} text = 'Back To Start' color = 'primary'/>
+                            <Link to = '/'>
+                                <CustomBtn text = 'Back To Start' color = 'primary'/>
+                            </Link>
                             <CustomBtn text = 'Play Again' color = 'secondary' Click = {props.StartNewGame} icon = {<ThreeSixtySharp/>}/>
                         </div>
                     </div>

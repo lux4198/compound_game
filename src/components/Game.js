@@ -7,6 +7,7 @@ import ResultInterface from "./Results";
 import SendIcon from '@material-ui/icons/Send';
 import TimerIcon from '@material-ui/icons/Timer';
 import { HighlightSharp } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 
 
 
@@ -38,13 +39,13 @@ const styles = makeStyles({
 }); 
 
 // ends the current game cycle  
-function EndGameButton(props){
+function EndGameButton(){
     return(
     <div style = {{display : 'flex', flexDirection : 'row', justifyContent : 'flex-end', paddingBottom : '3rem', }}>
         <div style = {{paddingTop : '1rem'}}>
-            <CustomBtn text = 'End Game' color = 'primary'
-                        Click = {props.Click}>
-            </CustomBtn>
+            <Link to = '/'>
+                <CustomBtn text = 'End Game' color = 'primary'/>
+            </Link>
         </div>
     </div>
     )
@@ -209,8 +210,8 @@ class Game extends React.Component{
                 <div className = {classes.grid}>
                     <this.GameText/>
                     <div className = {classes.interface}>
-                        <EndGameButton Click = {(this.state.round.current === 1) ? props.HandleGameStart : props.RenderResult}/>
-                        <form /* noValidate */ autoComplete = 'off' onSubmit = {this.HandleSubmit} style = {{display : 'flex', flexDirection: 'column', }}>
+                        <EndGameButton/>
+                        <form autoComplete = 'off' onSubmit = {this.HandleSubmit} style = {{display : 'flex', flexDirection: 'column', }}>
                             <div>
                                 <Input style = {{paddingBottom : '2rem',}}  value = {this.state.submissionInput} 
                                         onChange = {(e) => {this.setState({submissionInput : e.target.value})}}
@@ -235,14 +236,12 @@ class Game extends React.Component{
 
     // Render GameInterface or ResultInterface depending on state.displayResult
     RenderInterface(props){
-        if (this.state.displayResult | this.state.round.current === 7){
-            return(<ResultInterface Results = {this.state.GameHistory} HandleGameStart = {() => {
-                this.props.HandleGameStart()}} StartNewGame = {() => {this.StartNewGame()}} className = {props.className}
+        if (this.state.displayResult | this.state.round.current === 6){
+            return(<ResultInterface Results = {this.state.GameHistory} StartNewGame = {() => {this.StartNewGame()}} className = {props.className}
                 />
                 )
         } else {
-           return(<this.GameInterface RenderResult = {() => {this.RenderResult()}} HandleGameStart = {() => {
-               this.props.HandleGameStart()}} className = {props.className}
+           return(<this.GameInterface RenderResult = {() => {this.RenderResult()}} className = {props.className}
                />
            )
         }}

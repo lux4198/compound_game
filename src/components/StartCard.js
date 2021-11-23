@@ -2,6 +2,7 @@ import React from 'react'
 import { Typography, Card, makeStyles} from '@material-ui/core'
 import CustomBtn from './CustomBtn'
 import start_card_expo from '../images/start_card_expo.png';
+import { Link } from 'react-router-dom';
 
 const styles = makeStyles({
     grid:{
@@ -42,14 +43,14 @@ function StartText() {
     )
 };
 
-function StartButton(props) {
+function StartButton() {
     const classes = styles()
     return(
         <div className = {classes.button}>
             <div style = {{display : 'flex', justifyContent : 'flex-end', }}>
-                <CustomBtn text = 'Play' color = 'secondary'
-                            Click = {props.Click}>
-                </CustomBtn>
+                <Link to = '/game'>
+                    <CustomBtn text = 'Play' color = 'secondary'/>
+                </Link>
             </div>
             <div style = {{width : '110%' }}>
                 <img src = {start_card_expo} style = {{width : '100%', heigth : 'auto',}}></img>
@@ -65,7 +66,7 @@ function StartCard(props) {
         <Card  className = {props.className}>
             <div className = {classes.grid}>
                 <StartText/>
-                <StartButton Click = {props.Click}/>
+                <StartButton/>
             </div>
         </Card>
     )

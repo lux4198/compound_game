@@ -1,8 +1,8 @@
 import { createTheme , ThemeProvider, makeStyles } from '@material-ui/core/styles'
 import './App.css';
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import Typography from '@material-ui/core/Typography'
-import { Radio, Button, Grid, Paper, Card, Container } from '@material-ui/core'
+import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
 
 
 // Components
@@ -38,61 +38,31 @@ const styles = makeStyles({
 });
 
 
-class App extends React.Component{
-  constructor(props){
-    super(props)
 
-    this.state = {
-      gameStartButton : false, 
-    }
 
-    this.HandleGameStart = this.HandleGameStart.bind(this)
-    this.RenderGame = this.RenderGame.bind(this)
-    this.GameInterface = this.GameInterface.bind(this)
-
-  }
-
-  HandleGameStart(){
-
-    this.setState(
-      {gameStartButton : !this.state.gameStartButton}
-    )
-  }
-
-  GameInterface(props){
-
-    if (props.gameStartButton){
-      return(
-        <Game HandleGameStart = {() => {this.HandleGameStart()}} className = {props.className}/>
-      )
-    }
-    else{
-      return(
-      <StartCard Click = {() => {this.HandleGameStart()}} className = {props.className}/>
-      );
-    }
-    }
-
-  RenderGame(props){
+function App(props){
     const classes = styles()
       return (
-        <div>
-          <div className = {classes.header}>
-            <NavBar/>
+        <Router>
+          <div>
+            <div className = {classes.header}>
+              <NavBar/>
+            </div>
+            <div>
+              <Routes>
+                <Route exact path = '/' element = {<StartCard className = {classes.gameInterface}/>}>
+                </Route>
+
+                <Route path = '/game' element = {<Game className = {classes.gameInterface}/>}>
+                </Route>
+              </Routes>
+            </div>
+            <div className = {classes.footer}> </div>
           </div>
-          <this.GameInterface gameStartButton = {props.gameStartButton} className = {classes.gameInterface}/> 
-          <div className = {classes.footer}> </div>
-        </div>
+        </Router>
       );
   }
 
-  render(){
-      return (
-        <this.RenderGame gameStartButton = {this.state.gameStartButton}/>
-        // <Game HandleGameStart = {this.HandleGameStart()}/>
-      );
-  }
-}
 
 
 export default App;
