@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Input from "./Input";
 import { Card, Typography, makeStyles } from "@material-ui/core";
 import CustomBtn from "./CustomBtn";
@@ -6,8 +6,8 @@ import ResultInterface from "./Results";
 
 import SendIcon from '@material-ui/icons/Send';
 import TimerIcon from '@material-ui/icons/Timer';
-import { HighlightSharp } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+import { ThreeSixtySharp } from "@material-ui/icons";
 
 
 
@@ -97,7 +97,9 @@ class Game extends React.Component{
         this.saveToHistory = this.saveToHistory.bind(this)
 
         this.GameText = this.GameText.bind(this)
+        this.GameInput = this.GameInput.bind(this)
         this.GameInterface = this.GameInterface.bind(this)
+        this.IntermediateResult = this.IntermediateResult.bind(this)
         this.RenderInterface = this.RenderInterface.bind(this)
         
 
@@ -129,6 +131,54 @@ class Game extends React.Component{
         }
     }
 
+    // resets the game values in state for next round
+    ResetGame(){
+        this.setState((state) => { 
+            return(
+                {round : {
+                current : this.state.round.current += 1, 
+                capital : Math.ceil(Math.random()*10)*1000, 
+                years : Math.ceil(Math.random() * 30), 
+                interest : Math.ceil(Math.random() * 12),
+                },
+                seconds : 30,
+                submissionInput : ''})
+        })}
+
+    // checks if whole number has been submitted, if so next round starts
+    HandleSubmit(e){
+        e.preventDefault()
+        const re = /^[0-9]+$/ 
+        if (re.test(this.state.submissionInput)) {
+            this.RenderResult()
+
+            this.saveToHistory()
+            // reset state values
+            this.ResetGame()
+            
+            // reset the timer
+            this.componentWillUnmount()
+            }
+        else {
+            alert('Please type in a whole number')
+        }
+        }
+
+    // saves the current round details to GameHistory 
+    saveToHistory(){
+
+        this.setState((state) =>{
+            const History = state.GameHistory
+            const r = state.round
+            const result = Math.round((r.capital * ((1 + (r.interest/100))**r.years)))
+            if(state.submissionInput != ''){
+                return(
+                    {GameHistory : History.concat([{current : r.current, capital : r.capital, years : r.years,
+                    interest : r.interest, result : result, userInput : state.submissionInput}])})
+            }
+        })
+    }
+
     // displays example by using .state variables
     GameText() {
         const classes = styles()
@@ -155,51 +205,39 @@ class Game extends React.Component{
         )
     }
 
-    // resets the game values in state for next round
-    ResetGame(){
-        this.setState((state) => { 
-            return(
-                {round : {
-                current : this.state.round.current += 1, 
-                capital : Math.ceil(Math.random()*10)*1000, 
-                years : Math.ceil(Math.random() * 30), 
-                interest : Math.ceil(Math.random() * 12),
-                },
-                seconds : 30,
-                submissionInput : ''})
-        })}
+    // displays input interface where user types in guess and can end the game 
+    GameInput(){
+        const classes = styles();
+        return(
+            <div className = {classes.interface}>
+                <EndGameButton/>
+                <form autoComplete = 'off' onSubmit = {this.HandleSubmit} style = {{display : 'flex', flexDirection: 'column', }}>
+                    <div>
+                        <Input style = {{paddingBottom : '2rem',}}  value = {this.state.submissionInput} 
+                                onChange = {(e) => {this.setState({submissionInput : e.target.value})}}
+                                />
+                    </div>
+                    <Submitbutton/>
+                </form>
+            </div>
+        )
+    }
 
-    // checks if whole number has been submitted, if so next round starts
-    HandleSubmit(e){
-        e.preventDefault()
-        const re = /^[0-9]+$/ 
-        if (re.test(this.state.submissionInput)) {
-            this.saveToHistory()
-            // reset state values
-            this.ResetGame()
-            
-            // reset the timer
-            this.componentWillUnmount()
-            this.componentDidMount()
-            }
-        else {
-            alert('Please type in a whole number')
-        }
-        }
+    // displays result in between rounds for a short feedback loop 
 
-    // saves the current round details to GameHistory 
-    saveToHistory(){
-
-        this.setState((state) =>{
-            const History = state.GameHistory
-            const r = state.round
-            const result = Math.round((r.capital * ((1 + (r.interest/100))**r.years)))
-            if(state.submissionInput != ''){
-                return(
-                    {GameHistory : History.concat([{current : r.current, capital : r.capital, years : r.years,
-                    interest : r.interest, result : result, userInput : state.submissionInput}])})
-            }
-        })
+    IntermediateResult(){
+        const classes = styles();
+        // go into gameHistory and get previous result and calculate accuracy of submission
+        const previousRound = this.state.GameHistory.at(-1)
+        return(
+            <div className = {classes.interface}>
+                <EndGameButton/>
+                <CustomBtn text = 'Continue' onClick = {() => {
+                    this.componentDidMount()
+                }}
+                />
+            </div>
+        )
     }
     
     // displays the Game Interface 
@@ -209,17 +247,7 @@ class Game extends React.Component{
             <Card  className = {props.className}>
                 <div className = {classes.grid}>
                     <this.GameText/>
-                    <div className = {classes.interface}>
-                        <EndGameButton/>
-                        <form autoComplete = 'off' onSubmit = {this.HandleSubmit} style = {{display : 'flex', flexDirection: 'column', }}>
-                            <div>
-                                <Input style = {{paddingBottom : '2rem',}}  value = {this.state.submissionInput} 
-                                        onChange = {(e) => {this.setState({submissionInput : e.target.value})}}
-                                        />
-                            </div>
-                            <Submitbutton/>
-                        </form>
-                    </div>
+                    {(this.state.displayResult) ? <this.IntermediateResult/> : <this.GameInput/>}
                 </div>
             </Card>
         );
@@ -227,16 +255,15 @@ class Game extends React.Component{
 
     // trigger if statement in RenderInterface to render results + save last round to GameHistory
     RenderResult(){
-        this.componentWillUnmount()
-        this.saveToHistory()
-        this.setState({
-            displayResult : !this.state.displayResult, 
-        })
+            this.setState({
+                displayResult : !this.state.displayResult })
+            console.log(this.state.displayResult)
     }
 
     // Render GameInterface or ResultInterface depending on state.displayResult
     RenderInterface(props){
-        if (this.state.displayResult | this.state.round.current === 6){
+        if (this.state.round.current === 6){
+            this.componentWillUnmount()
             return(<ResultInterface Results = {this.state.GameHistory} StartNewGame = {() => {this.StartNewGame()}} className = {props.className}
                 />
                 )

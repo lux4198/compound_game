@@ -38,30 +38,29 @@ const styles = makeStyles({
 
 }); 
 
+function CalculateResult(Results){
+    const results = Results
+    let accuracy = 0
+
+    results.forEach(element => {
+        if (element['userInput'] != ''){
+            var a = (Number(element['userInput']) / element['result']);
+            (a < 1) ? accuracy += a : accuracy += (1 / (a))
+        }})
+
+    accuracy = (accuracy/(results.length)) 
+
+    return(Math.round(accuracy*100))
+}
+
 class ResultInterface extends React.Component{
     constructor(props){
         super(props)
         this.state = {
         }
         
-        this.CalculateResult = this.CalculateResult.bind(this)
         this.GameText = this.GameText.bind(this)
         this.ResultCard = this.ResultCard.bind(this)
-    }
-
-    CalculateResult(props){
-        const results = props.Results
-        let accuracy = 0
-
-        results.forEach(element => {
-            if (element['userInput'] != ''){
-                var a = (Number(element['userInput']) / element['result']);
-                (a < 1) ? accuracy += a : accuracy += (1 / (a))
-            }})
-
-        accuracy = (accuracy/(results.length)) 
-
-        return(Math.round(accuracy*100))
     }
 
     GameText(props) {
@@ -72,7 +71,7 @@ class ResultInterface extends React.Component{
         <div className = {classes.text}>
             <Typography variant = 'h4' style = {{paddingBottom: '2rem',}}>Your Results</Typography>
             <Typography variant = 'h5' style = {{}}> 
-            Your Guesses were on average <this.CalculateResult Results = {props.Results}/> % accurate. <br></br> 
+            Your Guesses were on average {CalculateResult(props.Results)} % accurate. <br></br> 
             For more details please click the button below. <br></br>
             Feel free to try again in another round. 
             <br></br>
@@ -101,8 +100,7 @@ class ResultInterface extends React.Component{
 
     render(){
         return(
-            <this.ResultCard Results = {this.props.Results} HandleGameStart = {() => {this.props.HandleGameStart()}}
-            StartNewGame = {() => {this.props.StartNewGame()}} className = {this.props.className}
+            <this.ResultCard Results = {this.props.Results} StartNewGame = {() => {this.props.StartNewGame()}} className = {this.props.className}
             />
         )
     }
