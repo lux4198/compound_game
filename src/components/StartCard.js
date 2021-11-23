@@ -34,7 +34,7 @@ function StartText() {
         <Typography variant = 'h4' style = {{paddingBottom: '2rem',}}> Play The Game </Typography>
         <Typography variant = 'h6' style = {{}}> 
         This game is designed to test Your inutition on compounding effects. <br></br> 
-        You will be given 6 different examples that represent a compounding problem. <br></br>
+        You will be given 5 different examples that represent a compounding problem. <br></br>
         You have 30 seconds to submit Your best guess for each example. Your Score will be calculated depending on the accuracy of Your submissions.
         <br></br>
         Good Luck! 

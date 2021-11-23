@@ -1,5 +1,6 @@
 import { Toolbar, Typography, makeStyles, Tooltip } from '@material-ui/core'
 import React from 'react'   
+import { Link } from 'react-router-dom'; 
 
 import start_card_expo from '../images/start_card_expo.png';
 import CustomBtn from './CustomBtn';
@@ -61,9 +62,9 @@ function NavBar() {
     return (
         <div className = {classes.header}>
             <Toolbar position = 'sticky' color = 'primary' className = {classes.bar}>
-                <a href = 'https://youtube.com' className = {classes.homeButton}>
+                <Link to = '/' className = {classes.homeButton}>
                     <img src = {start_card_expo} style = {{width : '99%'}}></img>
-                </a>
+                </Link>
 
                 <Typography variant = 'h5' className = {classes.menuItem} style = {{paddingLeft : '4rem'}}>
                     <Tooltip title = {aboutTooltip()}>
