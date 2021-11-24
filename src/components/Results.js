@@ -43,7 +43,7 @@ function CalculateResult(Results){
     let accuracy = 0
 
     results.forEach(element => {
-        if (element['userInput'] != ''){
+        if (element['userInput'] !== ''){
             var a = (Number(element['userInput']) / element['result']);
             (a < 1) ? accuracy += a : accuracy += (1 / (a))
         }})
@@ -91,7 +91,7 @@ class ResultInterface extends React.Component{
                             <Link to = '/'>
                                 <CustomBtn text = 'Back To Start' color = 'primary'/>
                             </Link>
-                            <CustomBtn text = 'Play Again' color = 'secondary' Click = {props.StartNewGame} icon = {<ThreeSixtySharp/>}/>
+                            <CustomBtn text = 'Play Again' color = 'secondary' onClick = {props.StartNewGame} icon = {<ThreeSixtySharp/>}/>
                         </div>
                     </div>
                 </Card>

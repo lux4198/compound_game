@@ -21,10 +21,11 @@ function CustomBtn(props) {
     return (
         <Button className = {(props.color === 'primary')? classes.primarybutton : classes.secondarybutton}
                 variant = 'contained'
-                onClick = {props.Click} 
+                onClick = {props.onClick} 
                 color = {props.color}
                 disabled = {props.disabled}
                 startIcon = {props.icon}
+                endIcon = {props.endIcon}
                 style = {props.style} 
                 type = {props.type}
                 >

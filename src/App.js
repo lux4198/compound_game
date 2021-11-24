@@ -1,24 +1,14 @@
-import { createTheme , ThemeProvider, makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import './App.css';
-import React, { useState} from 'react'
-import Typography from '@material-ui/core/Typography'
+import React from 'react'
 import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
 
 
 // Components
 
-import CustomBtn from './components/CustomBtn'
-import Input from './components/Input'
 import StartCard from './components/StartCard'
 import Game from './components/Game';
 import NavBar from './components/NavBar';
-
-
-// Icons / images
-
-import SettingsBackupRestoreIcon from '@material-ui/icons/SettingsBackupRestore';
-
-
 
 const styles = makeStyles({
   gameInterface : { 

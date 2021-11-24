@@ -4,10 +4,12 @@ import { Card, Typography, makeStyles } from "@material-ui/core";
 import CustomBtn from "./CustomBtn";
 import ResultInterface from "./Results";
 
-import SendIcon from '@material-ui/icons/Send';
 import TimerIcon from '@material-ui/icons/Timer';
 import { Link } from "react-router-dom";
-import { ThreeSixtySharp } from "@material-ui/icons";
+
+// Icons 
+import DoubleArrowTwoToneIcon from '@material-ui/icons/DoubleArrowTwoTone';
+import SendIcon from '@material-ui/icons/Send';
 
 
 
@@ -37,6 +39,10 @@ const styles = makeStyles({
     },  
 
 }); 
+
+function numberWithDots(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
 
 // ends the current game cycle  
 function EndGameButton(){
@@ -150,14 +156,8 @@ class Game extends React.Component{
         e.preventDefault()
         const re = /^[0-9]+$/ 
         if (re.test(this.state.submissionInput)) {
-            this.RenderResult()
-
-            this.saveToHistory()
-            // reset state values
-            this.ResetGame()
-            
-            // reset the timer
             this.componentWillUnmount()
+            this.RenderResult()
             }
         else {
             alert('Please type in a whole number')
@@ -228,14 +228,36 @@ class Game extends React.Component{
     IntermediateResult(){
         const classes = styles();
         // go into gameHistory and get previous result and calculate accuracy of submission
-        const previousRound = this.state.GameHistory.at(-1)
+        const currentRound = this.state.round
+        const result = Math.round((currentRound.capital * ((1 + (currentRound.interest/100))**currentRound.years)))
+        let accuracy = 0 
+        var a = (Number(this.state.submissionInput) / result);
+        (a < 1) ? accuracy += a : accuracy += (1 / (a))
+
+        const continueBtn = (e) => {
+            e.preventDefault()
+            this.saveToHistory()
+
+            // reset state values
+            this.ResetGame()
+            
+            // reset the timer
+            this.componentDidMount()
+            
+            // reset displayResult to go back to game 
+            this.RenderResult()
+        }
+
         return(
             <div className = {classes.interface}>
                 <EndGameButton/>
-                <CustomBtn text = 'Continue' onClick = {() => {
-                    this.componentDidMount()
-                }}
-                />
+                <div>Submission: {numberWithDots(this.state.submissionInput)}</div>
+                <div>Correct Result: {numberWithDots(result)}</div>
+                <div>Accuracy: {Math.round(accuracy*100)} %</div>
+                <div style = {{display : 'flex', flexDirection : 'row', justifyContent : 'flex-start', paddingTop : '3rem', }}> 
+                    <CustomBtn type = 'submit' text = 'Continue' endIcon = {<DoubleArrowTwoToneIcon/>} color = 'secondary'
+                                onClick = {continueBtn}/>
+                </div>
             </div>
         )
     }
@@ -257,7 +279,6 @@ class Game extends React.Component{
     RenderResult(){
             this.setState({
                 displayResult : !this.state.displayResult })
-            console.log(this.state.displayResult)
     }
 
     // Render GameInterface or ResultInterface depending on state.displayResult
