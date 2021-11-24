@@ -4,12 +4,12 @@ import { Card, Typography, makeStyles } from "@material-ui/core";
 import CustomBtn from "./CustomBtn";
 import ResultInterface from "./Results";
 
-import TimerIcon from '@material-ui/icons/Timer';
 import { Link } from "react-router-dom";
 
 // Icons 
 import DoubleArrowTwoToneIcon from '@material-ui/icons/DoubleArrowTwoTone';
 import SendIcon from '@material-ui/icons/Send';
+import TimerIcon from '@material-ui/icons/Timer';
 
 
 
@@ -90,7 +90,7 @@ class Game extends React.Component{
             userInput : '', 
             submissionInput : '', 
             
-            GameHistory : [],
+            GameHistory : (localStorage.getItem('games')) ? JSON.parse(localStorage.getItem('games')) : [],
             displayResult : false, 
         }
 
@@ -101,6 +101,7 @@ class Game extends React.Component{
         this.ResetGame = this.ResetGame.bind(this)
         this.RenderResult = this.RenderResult.bind(this)
         this.saveToHistory = this.saveToHistory.bind(this)
+        this.saveToLocalStorage = this.saveToLocalStorage.bind(this)
 
         this.GameText = this.GameText.bind(this)
         this.GameInput = this.GameInput.bind(this)
@@ -177,6 +178,12 @@ class Game extends React.Component{
                     interest : r.interest, result : result, userInput : state.submissionInput}])})
             }
         })
+    }
+
+    // saves the History of the current game to localStorage
+
+    saveToLocalStorage(){
+        localStorage.setItem('games', JSON.stringify(this.state.GameHistory))
     }
 
     // displays example by using .state variables
@@ -283,7 +290,8 @@ class Game extends React.Component{
 
     // Render GameInterface or ResultInterface depending on state.displayResult
     RenderInterface(props){
-        if (this.state.round.current === 6){
+        if (this.state.round.current === 3){
+            this.saveToLocalStorage()
             this.componentWillUnmount()
             return(<ResultInterface Results = {this.state.GameHistory} StartNewGame = {() => {this.StartNewGame()}} className = {props.className}
                 />
