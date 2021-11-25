@@ -90,7 +90,7 @@ class Game extends React.Component{
             userInput : '', 
             submissionInput : '', 
             
-            GameHistory : (localStorage.getItem('games')) ? JSON.parse(localStorage.getItem('games')) : [],
+            GameHistory : [],
             displayResult : false, 
         }
 
@@ -172,18 +172,36 @@ class Game extends React.Component{
             const History = state.GameHistory
             const r = state.round
             const result = Math.round((r.capital * ((1 + (r.interest/100))**r.years)))
+            let accuracy = 0 
+            var a = (Number(this.state.submissionInput) / result);
+            (a < 1) ? accuracy += a : accuracy += (1 / (a))
+            accuracy = Math.round(accuracy*100)
             if(state.submissionInput != ''){
                 return(
                     {GameHistory : History.concat([{current : r.current, capital : r.capital, years : r.years,
-                    interest : r.interest, result : result, userInput : state.submissionInput}])})
+                    interest : r.interest, result : result, userInput : state.submissionInput, accuracy : accuracy}])})
             }
         })
     }
 
     // saves the History of the current game to localStorage
-
     saveToLocalStorage(){
-        localStorage.setItem('games', JSON.stringify(this.state.GameHistory))
+        var existingEntry = JSON.parse(localStorage.getItem('games'))
+        console.log('entry1', existingEntry)
+
+        if (existingEntry == null){
+            existingEntry = []
+        }
+        var History = this.state.GameHistory
+
+        console.log('state.history', History)
+        const newEntry = existingEntry.concat(History)     
+        console.log('concat', newEntry)
+
+        localStorage.setItem('games', JSON.stringify(newEntry))
+        console.log(JSON.parse(localStorage.getItem('games')))
+
+
     }
 
     // displays example by using .state variables
@@ -290,7 +308,7 @@ class Game extends React.Component{
 
     // Render GameInterface or ResultInterface depending on state.displayResult
     RenderInterface(props){
-        if (this.state.round.current === 3){
+        if (this.state.round.current === 6){
             this.saveToLocalStorage()
             this.componentWillUnmount()
             return(<ResultInterface Results = {this.state.GameHistory} StartNewGame = {() => {this.StartNewGame()}} className = {props.className}
