@@ -14,10 +14,10 @@ const styles = makeStyles({
         ['@media (max-width: 780px)'] : {
             flexdirection : 'column'
         },
-        width : '60%'
+        width : '100%'
     }, 
     homeButton: {
-        width: "10%", 
+        width: "6%", 
         ['@media (max-width:780px)']: { 
            display: "none"
            }, 
@@ -81,6 +81,19 @@ function NavBar() {
                         </div>
                     </Tooltip>
                 </Typography>
+
+                <Typography variant = 'h5' className = {classes.menuItem}>
+                    <Link to = '/results' style = {{textDecoration : 'none', }}>
+                        <div className = {classes.menuText}>
+                            Results
+                        </div>
+                    </Link>
+                </Typography>
+
+                <Link to = '/' className = {classes.menuItem} style = {{textDecoration : 'none'}}>
+                    <CustomBtn text = 'Start' color = 'secondary'/>
+                </Link>
+
             </Toolbar>
         </div>
     )

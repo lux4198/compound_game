@@ -107,3 +107,4 @@ class ResultInterface extends React.Component{
 }
 
 export default ResultInterface
+export {CalculateResult}
