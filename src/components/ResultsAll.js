@@ -1,10 +1,11 @@
-import React from 'react'
-import { makeStyles, Typography, Card, Accordion, AccordionDetails, AccordionSummary } from '@material-ui/core';
+import React, { useState } from 'react'
+import { makeStyles, Typography, Card, Accordion, AccordionDetails, AccordionSummary, Popper } from '@material-ui/core';
 import {CalculateResult} from './Results'
 
 import { Link } from 'react-router-dom';
 
 import {ExpandMore} from '@material-ui/icons'
+import CustomBtn from './CustomBtn';
 
 const styles = makeStyles({
     
@@ -16,7 +17,7 @@ function AccordionObject(props){
     }
     const text = JSON.parse(props.text)
     return(
-        <Accordion>
+        <Accordion> 
             <AccordionSummary
             expandIcon={<ExpandMore/>}
             aria-controls="panel1a-content"
@@ -59,7 +60,7 @@ function AccordionObject(props){
 
 function ResultsAll(props) {
     const classes = styles()
-    var localData = localStorage.getItem('games')
+    const [localData, setLocalData] = useState(localStorage.getItem('games'))
     if (localData == null){
         return(
             <div style = {{display : 'flex', justifyContent : 'center', width : '100%', }}>
@@ -81,13 +82,17 @@ function ResultsAll(props) {
             }
             GameResults.push(Results)
         }
-
     return (
         <div style = {{display : 'flex', justifyContent : 'center', width : '100%', }}>
-            <Card  className = {props.className} style = {{width : '80%', marginRight : 0, flexDirection : 'column', }}>
-                {GameResults.map((element) => 
-                    <AccordionObject header = {'Game ' + (GameResults.indexOf(element) + 1)}
-                    subheader = {'Overall Accuracy: ' + CalculateResult(element) + '%'} text = {JSON.stringify(element)}/>)}
+            <Card  className = {props.className} style = {{width : '80%', marginRight : 0, flexDirection : 'column', paddingTop : '2rem', paddingBottom : '2rem', }}>
+                <div style = {{paddingBottom : '1rem', }}>
+                    <CustomBtn onClick = {() => {setLocalData(); localStorage.clear()}} text = 'Clear Results' color = 'primary' style = {{width : '20%', float : 'right'}}/>
+                </div>
+                <div>
+                    {GameResults.map((element) => 
+                        <AccordionObject header = {'Game ' + (GameResults.indexOf(element) + 1)}
+                        subheader = {'Overall Accuracy: ' + CalculateResult(element) + '%'} text = {JSON.stringify(element)}/>)}
+                </div>
             </Card>
         </div>
     )
