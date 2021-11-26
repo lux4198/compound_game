@@ -43,9 +43,14 @@ function CalculateResult(Results){
     let accuracy = 0
 
     results.forEach(element => {
-        if (element['userInput'] !== ''){
+        if (element){
             var a = (Number(element['userInput']) / element['result']);
             (a < 1) ? accuracy += a : accuracy += (1 / (a))
+        }
+        else{
+            return(
+                console.log('return')
+            )
         }})
 
     accuracy = (accuracy/(results.length)) 

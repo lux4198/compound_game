@@ -131,9 +131,8 @@ class Game extends React.Component{
         if (this.state.seconds > 0){
             this.setState( { seconds : this.state.seconds -= 1})
         } else {
-            this.ResetGame()
+            this.RenderResult()
             this.componentWillUnmount()
-            this.componentDidMount()
         }
     }
 
@@ -167,7 +166,6 @@ class Game extends React.Component{
 
     // saves the current round details to GameHistory 
     saveToHistory(){
-
         this.setState((state) =>{
             const History = state.GameHistory
             const r = state.round
@@ -176,11 +174,10 @@ class Game extends React.Component{
             var a = (Number(this.state.submissionInput) / result);
             (a < 1) ? accuracy += a : accuracy += (1 / (a))
             accuracy = Math.round(accuracy*100)
-            if(state.submissionInput != ''){
-                return(
-                    {GameHistory : History.concat([{current : r.current, capital : r.capital, years : r.years,
-                    interest : r.interest, result : result, userInput : state.submissionInput, accuracy : accuracy}])})
-            }
+
+            return(
+                {GameHistory : History.concat([{current : r.current, capital : r.capital, years : r.years,
+                interest : r.interest, result : result, userInput : state.submissionInput, accuracy : accuracy}])})
         })
     }
 

@@ -46,7 +46,7 @@ function AccordionObject(props){
                                 <td>{round.interest} %</td>
                                 <td>{round.years} </td>
                                 <td>{round.result} </td>
-                                <td>{round.userInput} </td>
+                                <td>{(round.userInput !== '')? round.userInput : 'Timeout'} </td>
                                 <td>{round.accuracy} %</td>
                             </tr>
                         )}
