@@ -82,10 +82,12 @@ function ResultsAll(props) {
             }
             GameResults.push(Results)
         }
+    const highscore = Math.max(...GameResults.map((element) => CalculateResult(element)))
     return (
         <div style = {{display : 'flex', justifyContent : 'center', width : '100%', }}>
             <Card  className = {props.className} style = {{width : '80%', marginRight : 0, flexDirection : 'column', paddingTop : '2rem', paddingBottom : '2rem', }}>
                 <div style = {{paddingBottom : '1rem', }}>
+                    Your Results - Highscore: {highscore}%
                     <CustomBtn onClick = {() => {setLocalData(); localStorage.clear()}} text = 'Clear Results' color = 'primary' style = {{width : '20%', float : 'right'}}/>
                 </div>
                 <div>
