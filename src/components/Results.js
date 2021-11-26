@@ -61,11 +61,29 @@ class ResultInterface extends React.Component{
         
         this.GameText = this.GameText.bind(this)
         this.ResultCard = this.ResultCard.bind(this)
+        this.saveToLocalStorage = this.saveToLocalStorage.bind(this)
+    }
+
+
+    componentDidMount(){
+        this.saveToLocalStorage()
+    }
+    // saves the History of the current game to localStorage
+    saveToLocalStorage(){
+        let existingEntry = localStorage.getItem('games')
+        console.log('entry', existingEntry)
+
+        if (existingEntry == null){
+            existingEntry = JSON.stringify([])
+        }
+        
+        localStorage.setItem('games', JSON.stringify(JSON.parse(existingEntry).concat(this.props.Results)))
+        
+        console.log(JSON.parse(localStorage.getItem('games')))
     }
 
     GameText(props) {
         const classes = styles()
-    
         return(
     
         <div className = {classes.text}>
@@ -83,6 +101,7 @@ class ResultInterface extends React.Component{
 
     ResultCard(props) {
         const classes = styles();
+
             return(
                 <Card  className = {props.className} style = {{width : '60%'}}>
                     <div className = {classes.grid}>
@@ -100,8 +119,7 @@ class ResultInterface extends React.Component{
 
     render(){
         return(
-            <this.ResultCard Results = {this.props.Results} StartNewGame = {() => {this.props.StartNewGame()}} className = {this.props.className}
-            />
+            <this.ResultCard Results = {this.props.Results} StartNewGame = {() => {this.props.StartNewGame()}} className = {this.props.className}/>
         )
     }
 }

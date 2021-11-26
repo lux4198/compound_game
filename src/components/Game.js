@@ -101,7 +101,6 @@ class Game extends React.Component{
         this.ResetGame = this.ResetGame.bind(this)
         this.RenderResult = this.RenderResult.bind(this)
         this.saveToHistory = this.saveToHistory.bind(this)
-        this.saveToLocalStorage = this.saveToLocalStorage.bind(this)
 
         this.GameText = this.GameText.bind(this)
         this.GameInput = this.GameInput.bind(this)
@@ -143,13 +142,14 @@ class Game extends React.Component{
         this.setState((state) => { 
             return(
                 {round : {
-                current : this.state.round.current += 1, 
+                current : state.round.current += 1, 
                 capital : Math.ceil(Math.random()*10)*1000, 
                 years : Math.ceil(Math.random() * 30), 
                 interest : Math.ceil(Math.random() * 12),
                 },
                 seconds : 30,
-                submissionInput : ''})
+                submissionInput : '', 
+            })
         })}
 
     // checks if whole number has been submitted, if so next round starts
@@ -182,26 +182,6 @@ class Game extends React.Component{
                     interest : r.interest, result : result, userInput : state.submissionInput, accuracy : accuracy}])})
             }
         })
-    }
-
-    // saves the History of the current game to localStorage
-    saveToLocalStorage(){
-        var existingEntry = JSON.parse(localStorage.getItem('games'))
-        console.log('entry1', existingEntry)
-
-        if (existingEntry == null){
-            existingEntry = []
-        }
-        var History = this.state.GameHistory
-
-        console.log('state.history', History)
-        const newEntry = existingEntry.concat(History)     
-        console.log('concat', newEntry)
-
-        localStorage.setItem('games', JSON.stringify(newEntry))
-        console.log(JSON.parse(localStorage.getItem('games')))
-
-
     }
 
     // displays example by using .state variables
@@ -262,7 +242,6 @@ class Game extends React.Component{
         const continueBtn = (e) => {
             e.preventDefault()
             this.saveToHistory()
-
             // reset state values
             this.ResetGame()
             
@@ -309,10 +288,9 @@ class Game extends React.Component{
     // Render GameInterface or ResultInterface depending on state.displayResult
     RenderInterface(props){
         if (this.state.round.current === 6){
-            this.saveToLocalStorage()
             this.componentWillUnmount()
             return(<ResultInterface Results = {this.state.GameHistory} StartNewGame = {() => {this.StartNewGame()}} className = {props.className}
-                />
+                    />
                 )
         } else {
            return(<this.GameInterface RenderResult = {() => {this.RenderResult()}} className = {props.className}

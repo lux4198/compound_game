@@ -74,7 +74,7 @@ function ResultsAll(props) {
     var parsedData = JSON.parse(localData)
     
     var GameResults = []
-    for (var i = 0; i < parsedData.length; i += 10){
+    for (var i = 0; i < parsedData.length; i += 5){
         var Results = []
             for (var j = 0; j < 5; j += 1){
                 Results.push(parsedData[i + j])
