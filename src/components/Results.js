@@ -9,6 +9,8 @@ import CustomBtn from './CustomBtn';
 import { ThreeSixtySharp } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 
+// this is the interface for the end of a game, dont confuse with Resultsall which renders the gameHistory and has its own page
+
 const styles = makeStyles({
     grid : {
         display : 'flex', 
@@ -92,10 +94,10 @@ class ResultInterface extends React.Component{
         return(
     
         <div className = {classes.text}>
-            <Typography variant = 'h4' style = {{paddingBottom: '2rem',}}>Your Results</Typography>
-            <Typography variant = 'h5' style = {{}}> 
-            Your Guesses were on average {CalculateResult(props.Results)} % accurate. <br></br> 
-            For more details please click the button below. <br></br>
+            <Typography variant = 'h3' style = {{paddingBottom: '1rem',}}>Your Results</Typography>
+            <Typography variant = 'h4' style = {{paddingBottom: '1rem',}}> Your Guesses were on average {CalculateResult(props.Results)} % accurate. </Typography>
+            <Typography variant = 'h5'> 
+            Checkout the Resultspage for more details on your gamehistory. <br></br>
             Feel free to try again in another round. 
             <br></br>
             Good Luck! 
@@ -108,16 +110,16 @@ class ResultInterface extends React.Component{
         const classes = styles();
 
             return(
-                <Card  className = {props.className} style = {{width : '60%'}}>
+                <Card  className = {props.className}>
                     <div className = {classes.grid}>
                         <this.GameText Results = {props.Results}/>
-                        <div className = {classes.interface}>
-                            <Link to = '/'>
-                                <CustomBtn text = 'Back To Start' color = 'primary'/>
+                        <div className = {classes.interface} >
+                            <Link to = '/results'>
+                                <CustomBtn text = 'Go To Results' color = 'primary' />
                             </Link>
                             <CustomBtn text = 'Play Again' color = 'secondary' onClick = {props.StartNewGame} icon = {<ThreeSixtySharp/>}/>
                         </div>
-                    </div>
+                    </div>  
                 </Card>
         )
     }
