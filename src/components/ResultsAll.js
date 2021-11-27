@@ -11,6 +11,10 @@ const styles = makeStyles({
     
 }); 
 
+function numberWithDots(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
 function AccordionObject(props){
     if (props.text == undefined){
         return('No Result')
@@ -43,11 +47,11 @@ function AccordionObject(props){
                         {text && text.map(round =>
                             <tr key={round.current}>
                                 <td>{round.current}</td>
-                                <td>{round.capital} $</td>
+                                <td>{numberWithDots(round.capital)} $</td>
                                 <td>{round.interest} %</td>
                                 <td>{round.years} </td>
-                                <td>{round.result} </td>
-                                <td>{(round.userInput !== '')? round.userInput : 'Timeout'} </td>
+                                <td>{numberWithDots(round.result)} </td>
+                                <td>{(round.userInput !== '')? numberWithDots(round.userInput) : 'Timeout'} </td>
                                 <td>{round.accuracy} %</td>
                             </tr>
                         )}
@@ -63,11 +67,13 @@ function ResultsAll(props) {
     const [localData, setLocalData] = useState(localStorage.getItem('games'))
     if (localData == null){
         return(
-            <div style = {{display : 'flex', justifyContent : 'center', width : '100%', }}>
-                <Card  className = {props.className} style = {{width : '80%', marginRight : 0,  }}>
-                    There are no results here yet. <br></br>
-                    Play the game to test Your skills!
-                    
+            <div style = {{display : 'flex', justifyContent : 'center', width : '100%',}}>
+                <Card  className = {props.className} style = {{width : '60%', marginRight : 0,  flexDirection : 'column', }}>
+                    <Typography variant = 'h3' style = {{paddingBottom : '1rem', }}> There are no results here yet. </Typography>
+                    <Typography style = {{paddingBottom : '1rem', }}> Play the game to test Your skills. </Typography>
+                    <Link to = '/game'>
+                        <CustomBtn text = 'Play' color = 'primary'/>
+                    </Link>
                 </Card>
             </div>
             )
@@ -85,8 +91,8 @@ function ResultsAll(props) {
     const highscore = Math.max(...GameResults.map((element) => CalculateResult(element)))
     return (
         <div style = {{display : 'flex', justifyContent : 'center', width : '100%', }}>
-            <Card  className = {props.className} style = {{width : '80%', marginRight : 0, flexDirection : 'column', paddingTop : '2rem', paddingBottom : '2rem', }}>
-                <div style = {{paddingBottom : '1rem', }}>
+            <Card  className = {props.className} style = {{width : '80%', marginRight : 0, flexDirection : 'column', paddingTop : '2rem', paddingBottom : '2rem',  }}>
+                <div style = {{paddingBottom : '1rem',}}>
                     Your Results - Highscore: {highscore}%
                     <CustomBtn onClick = {() => {setLocalData(); localStorage.clear()}} text = 'Clear Results' color = 'primary' style = {{width : '20%', float : 'right'}}/>
                 </div>
