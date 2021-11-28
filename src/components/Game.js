@@ -129,7 +129,7 @@ class Game extends React.Component{
     // upon reaching 0 the state resets and the next round starts   
     timer() {
         if (this.state.seconds > 0){
-            this.setState( { seconds : this.state.seconds -= 1})
+            this.setState( { seconds : this.state.seconds - 1})
         } else {
             this.RenderResult()
             this.componentWillUnmount()
