@@ -33,12 +33,12 @@ function StartText() {
 
         <Typography variant = 'h4' style = {{paddingBottom: '1rem',}}> Play The Game </Typography>
         <Typography variant = 'h5' align = 'justify' style = {{paddingBlock : '0.2rem'}}> 
-            This game is designed to test Your inutition on compounding effects.
+            This game is designed to test your inutition on compounding effects.
         </Typography>
         <Typography variant = 'h5' align = 'justify' style = {{paddingBlock : '0.5rem'}}> 
             You will be given 5 different examples that represent a compounding problem.
             You have 30 seconds to submit Your best guess for each example.
-            Your Score will be calculated depending on the accuracy of Your submissions. 
+            Your Score will be calculated depending on the accuracy of your submissions. 
         </Typography>
         <Typography variant = 'h5'>
             Good Luck!
