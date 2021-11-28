@@ -37,7 +37,7 @@ function StartText() {
         </Typography>
         <Typography variant = 'h5' align = 'justify' style = {{paddingBlock : '0.5rem'}}> 
             You will be given 5 different examples that represent a compounding problem.
-            You have 30 seconds to submit Your best guess for each example.
+            You have 30 seconds to submit your best guess for each example.
             Your Score will be calculated depending on the accuracy of your submissions. 
         </Typography>
         <Typography variant = 'h5'>
