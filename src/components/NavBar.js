@@ -14,14 +14,14 @@ const styles = makeStyles({
         ['@media (max-width: 780px)'] : {
             flexdirection : 'column'
         },
-        width : '100%'
+        width : '99%'
     }, 
     homeButton: {
         width: "6%", 
         ['@media (max-width:780px)']: { 
            display: "none"
            }, 
-        paddingTop : '0.3rem'
+        paddingTop : '0.3rem',
     },
     menuItem: {
         flexGrow : 1, 
@@ -37,26 +37,6 @@ const styles = makeStyles({
     }
 })
 
-const aboutTooltip = () => {
-    return(
-        <Typography variant = 'h5'>
-            This is a beginner React project to show my many react skills. <br></br>
-            If You have any Feedback feel free to share it with me via email.
-            Thank you very much for visiting the website and I hope to see you soon. 
-        </Typography>
-    )
-}
-
-const feedbackTooltip = () => {
-    return(
-        <Typography variant = 'h5'>
-            I hope you were able to improve Your compounding knowledge and intuition.<br></br>
-            If you have any feedback or ideas You want to share, feel free to contact us via email. 
-            See You soon. 
-        </Typography>
-    )
-}
-
 function NavBar() {
     const classes = styles()
     return (
@@ -67,19 +47,19 @@ function NavBar() {
                 </Link>
 
                 <Typography variant = 'h5' className = {classes.menuItem} style = {{paddingLeft : '4rem'}}>
-                    <Tooltip title = {aboutTooltip()}>
+                    <Link to = '/about' style = {{textDecoration : 'none'}}>
                         <div className = {classes.menuText}>
                             About 
                         </div>
-                    </Tooltip>
+                    </Link>
                 </Typography>
 
                 <Typography variant = 'h5' className = {classes.menuItem}>
-                    <Tooltip title = {feedbackTooltip()}>
+                    <Link to = '/feedback' style = {{textDecoration : 'none'}}>
                         <div className = {classes.menuText}>
                             Feedback
                         </div>
-                    </Tooltip>
+                    </Link>
                 </Typography>
 
                 <Typography variant = 'h5' className = {classes.menuItem}>
@@ -90,9 +70,11 @@ function NavBar() {
                     </Link>
                 </Typography>
 
-                <Link to = '/' className = {classes.menuItem} style = {{textDecoration : 'none'}}>
-                    <CustomBtn text = 'Start' color = 'secondary'/>
-                </Link>
+                <div className = {classes.menuItem} style = {{width : '5%'}}>
+                    <Link to = '/'  style = {{textDecoration : 'none'}}>
+                        <CustomBtn text = 'Start' color = 'secondary'/>
+                    </Link>
+                </div>
 
             </Toolbar>
         </div>

@@ -68,8 +68,8 @@ function ResultsAll(props) {
     if (localData == null){
         return(
             <div style = {{display : 'flex', justifyContent : 'center', width : '100%',}}>
-                <Card  className = {props.className} style = {{width : '60%', marginRight : 0,  flexDirection : 'column', }}>
-                    <Typography variant = 'h3' style = {{paddingBottom : '1rem', }}> There are no results here yet. </Typography>
+                <Card  className = {props.className} style = {{width : '80%', marginRight : 0,  flexDirection : 'column', }}>
+                    <Typography variant = 'h3' style = {{paddingBottom : '1rem', paddingTop : '1.5rem', }}> There are no results here yet. </Typography>
                     <Typography style = {{paddingBottom : '1rem', }}> Play the game to test Your skills. </Typography>
                     <Link to = '/game'>
                         <CustomBtn text = 'Play' color = 'primary'/>
