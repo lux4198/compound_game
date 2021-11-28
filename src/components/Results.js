@@ -97,10 +97,8 @@ class ResultInterface extends React.Component{
             <Typography variant = 'h3' style = {{paddingBottom: '1rem',}}>Your Results</Typography>
             <Typography variant = 'h4' style = {{paddingBottom: '1rem',}}> Your Guesses were on average {CalculateResult(props.Results)} % accurate. </Typography>
             <Typography variant = 'h5'> 
-            Checkout the Resultspage for more details on your gamehistory. <br></br>
+            Checkout the Results page for more details on your game history. <br></br>
             Feel free to try again in another round. 
-            <br></br>
-            Good Luck! 
             </Typography>
         </div>
         )

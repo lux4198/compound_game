@@ -11,8 +11,8 @@ const styles = makeStyles({
     text: {
         display : 'flex', 
         flexDirection: 'column', 
-        width : '80%',
-        paddingRight : '4rem',
+        width : '90%',
+        paddingRight : '2rem',
         paddingTop : '3rem',
         paddingBottom : '4rem', 
         borderRight : 'black', 
@@ -31,13 +31,17 @@ function StartText() {
 
     <div className = {classes.text}>
 
-        <Typography variant = 'h4' style = {{paddingBottom: '2rem',}}> Play The Game </Typography>
-        <Typography variant = 'h6' style = {{}}> 
-        This game is designed to test Your inutition on compounding effects. <br></br> 
-        You will be given 5 different examples that represent a compounding problem. <br></br>
-        You have 30 seconds to submit Your best guess for each example. Your Score will be calculated depending on the accuracy of Your submissions.
-        <br></br>
-        Good Luck! 
+        <Typography variant = 'h4' style = {{paddingBottom: '1rem',}}> Play The Game </Typography>
+        <Typography variant = 'h5' align = 'justify' style = {{paddingBlock : '0.2rem'}}> 
+            This game is designed to test Your inutition on compounding effects.
+        </Typography>
+        <Typography variant = 'h5' align = 'justify' style = {{paddingBlock : '0.5rem'}}> 
+            You will be given 5 different examples that represent a compounding problem.
+            You have 30 seconds to submit Your best guess for each example.
+            Your Score will be calculated depending on the accuracy of Your submissions. 
+        </Typography>
+        <Typography variant = 'h5'>
+            Good Luck!
         </Typography>
     </div>
     )

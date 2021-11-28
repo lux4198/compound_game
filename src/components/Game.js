@@ -190,18 +190,22 @@ class Game extends React.Component{
     
         <div className = {classes.text}>
             <div style = {{display : 'flex', justifyContent : 'space-between'}}>
-                <Typography variant = 'h4' style = {{paddingBottom: '2rem',}}> Example No. {this.state.round.current}</Typography>
+                <Typography variant = 'h3' style = {{paddingBottom: '2rem',}}> Example No. {this.state.round.current}</Typography>
                 <div style = {{display : 'flex', flexDirection: 'row'}}>
                     <Typography variant = 'h3'>{this.state.seconds}</Typography>
                     <TimerIcon fontSize = 'large'/>
                 </div>
             </div>
-            <Typography variant = 'h5' style = {{}}> 
-            You have {this.state.round.capital} $ in the bank today. <br></br> 
-            Your bank will provide you with {this.state.round.interest} % interest per Year. <br></br>
+            <Typography variant = 'h4' style = {{paddingBottom : '0.5rem'}}> 
+            You have {this.state.round.capital} $ in the bank today.
+            </Typography>
+
+            <Typography variant = 'h4' style = {{paddingBottom : '0.5rem'}}>
+            Your bank will provide you with {this.state.round.interest} % interest per Year.
+            </Typography>
+
+            <Typography variant = 'h4' style = {{paddingBottom : '0.5rem'}}>
             How much Money will you have after {this.state.round.years} Years? 
-            <br></br>
-            Good Luck! 
             </Typography>
         </div>
         )
