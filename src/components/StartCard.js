@@ -57,7 +57,7 @@ function StartButton() {
                 </Link>
             </div>
             <div style = {{width : '110%' }}>
-                <img src = {start_card_expo} style = {{width : '100%', heigth : 'auto',}}></img>
+                <img src = {start_card_expo} style = {{width : '100%', heigth : 'auto',}} alt = ''></img>
             </div>
         </div>
     )

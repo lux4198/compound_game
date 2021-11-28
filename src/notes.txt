@@ -1,0 +1,35 @@
+Minor changes 
+
+-> Resultspage different coloring 
+-> Results after game Button to Results page and different styling
+
+
+Major components 
+
+-> create Feedback form were user can submit note which is displayed on the site 
+
+-> let user customize scale of game (interest rates / time / capital)
+
+-> refactor design to look good in different formats and on phone 
+
+Done 
+
+-> limit number of rounds per game to 5
+
+-> create Home Icon Button that routes back to start of Game 
+
+-> create shorter feedback loop 
+    - show user Result and accuracy of submission after every round 
+
+-> user can see previous results 
+    - display results for each game (and round?)
+    - create distinct results page were previous rounds are shown 
+    - links results page in NavBar 
+
+-> display timeout on Results page 
+
+-> create button that clears GameHistory on Resultspage
+
+-> start game button on empty results page 
+
+-> create distinct About and FeedBack Pages 

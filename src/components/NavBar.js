@@ -1,4 +1,4 @@
-import { Toolbar, Typography, makeStyles, Tooltip } from '@material-ui/core'
+import { Toolbar, Typography, makeStyles } from '@material-ui/core'
 import React from 'react'   
 import { Link } from 'react-router-dom'; 
 
@@ -11,16 +11,10 @@ const styles = makeStyles({
         backgroundColor : '#526268',
     },
     bar : { 
-        ['@media (max-width: 780px)'] : {
-            flexdirection : 'column'
-        },
-        width : '99%'
+        width : '100%'
     }, 
     homeButton: {
         width: "6%", 
-        ['@media (max-width:780px)']: { 
-           display: "none"
-           }, 
         paddingTop : '0.3rem',
     },
     menuItem: {
@@ -43,7 +37,7 @@ function NavBar() {
         <div className = {classes.header}>
             <Toolbar position = 'sticky' color = 'primary' className = {classes.bar}>
                 <Link to = '/' className = {classes.homeButton}>
-                    <img src = {start_card_expo} style = {{width : '99%'}}></img>
+                    <img src = {start_card_expo} style = {{width : '99%'}} alt = ''></img>
                 </Link>
 
                 <Typography variant = 'h5' className = {classes.menuItem} style = {{paddingLeft : '4rem'}}>

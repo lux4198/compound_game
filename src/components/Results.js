@@ -78,15 +78,12 @@ class ResultInterface extends React.Component{
     // saves the History of the current game to localStorage
     saveToLocalStorage(){
         let existingEntry = localStorage.getItem('games')
-        console.log('entry', existingEntry)
 
         if (existingEntry == null){
             existingEntry = JSON.stringify([])
         }
         
         localStorage.setItem('games', JSON.stringify(JSON.parse(existingEntry).concat(this.props.Results)))
-        
-        console.log(JSON.parse(localStorage.getItem('games')))
     }
 
     GameText(props) {

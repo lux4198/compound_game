@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { makeStyles, Typography, Card, Accordion, AccordionDetails, AccordionSummary, Popper } from '@material-ui/core';
+import { Typography, Card, Accordion, AccordionDetails, AccordionSummary } from '@material-ui/core';
 import {CalculateResult} from './Results'
 
 import { Link } from 'react-router-dom';
@@ -7,18 +7,11 @@ import { Link } from 'react-router-dom';
 import {ExpandMore} from '@material-ui/icons'
 import CustomBtn from './CustomBtn';
 
-const styles = makeStyles({
-    
-}); 
-
 function numberWithDots(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
 function AccordionObject(props){
-    if (props.text == undefined){
-        return('No Result')
-    }
     const text = JSON.parse(props.text)
     return(
         <Accordion> 
@@ -63,7 +56,7 @@ function AccordionObject(props){
 }
 
 function ResultsAll(props) {
-    const classes = styles()
+
     const [localData, setLocalData] = useState(localStorage.getItem('games'))
     if (localData == null){
         return(
