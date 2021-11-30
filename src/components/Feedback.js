@@ -9,7 +9,7 @@ function Feedback(props) {
         </Typography>
         <Typography variant = 'h4' align = 'justify' style = {{paddingBottom : '1rem', }}>
             I hope this tool helped you improve your intuition about compounding or was at least fun to try out. 
-            Since this is still a new projects there a lot more features that could be added to this site to improve the 
+            Since this is still a new project there are a lot more features that could be added to this site to improve the 
             experience. 
         </Typography>
         <Typography variant = 'h4' align = 'justify' style = {{paddingBottom : '1rem'}}> 
