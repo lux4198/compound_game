@@ -1,3 +1,43 @@
+# Compounder Web Game 
+
+Find a working version of this project at www.compounder.dev. For information on how to run the code yourself see the part below on Create React App. 
+
+## About 
+
+This was a project for learning React. It is a simple Web Game that tests your intuition on compounding effects. The user gets an example and has to submit a guess in 
+30 seconds. After 5 rounds the accuracy of all submissions is calculated and given as a score. The game history is saved to local storage and displayed on the /results page. 
+
+## Technology
+
+This Page uses the JavaScript library React. For styling I used the Material-UI library, for client side routing React Router. 
+
+## What I've learned
+
+
+### Fundamentals of React + more experience with JavaScript and Css
+
+-> using state and functional components \
+-> saving information to local storage \
+-> displaying information from local storage and deleting it + changing the interface \
+-> using react hooks like useEffect and useState \
+-> client side routing with React Router \
+
+### General skills
+   
+-> styling a webpage with an external library like material-UI \
+-> hosting a static website on netlify and registering a custom domain name \
+
+## Future features 
+
+-> let user choose dificulty of examples \
+-> counting the submission time into the overall score (faster submissions get more points) \
+-> text input field for the feedback page \
+-> creating a proper backend that stores user accounts and game history \
+
+
+---------------------------------------------------------------------------
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
